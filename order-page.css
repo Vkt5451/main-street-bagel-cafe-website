@@ -74,10 +74,118 @@ main {
   margin: 0;
   padding: 0;
   overflow: hidden;          /* optional: hides overflow if image is larger */
+  margin-bottom: 20px;
 }
 
 .image-gallery img {
   width: 100vw;              /* stretch full width */
   height: 60vh;              /* maintain aspect ratio */
   object-fit: cover;         /* optional: crops nicely if needed */
+}
+
+
+
+
+/* Basic reset */
+
+* {
+margin: 0;
+padding: 0;
+box-sizing: border-box;
+}
+
+body {
+font-family: Arial, sans-serif;
+background-color: #fdfdfd;
+padding: 20px;
+}
+
+/* Container that holds all the menu items */
+.menu-container {
+display: flex;
+flex-wrap: wrap;
+gap: 20px;
+justify-content: center;
+}
+
+/* Each menu item box */
+.menu-item {
+width: 300px;
+height: 300px;
+background-color: #fff;
+border: 1px solid #ddd;
+border-radius: 10px;
+overflow: hidden;
+display: flex;
+flex-direction: column;
+box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+transition: transform 0.2s ease;
+}
+
+.menu-item:hover {
+transform: scale(1.03);
+}
+
+.menu-item img {
+width: 100%;
+height: 60%;
+object-fit: cover;
+}
+
+.item-info {
+padding: 10px;
+height: 40%;
+display: flex;
+flex-direction: column;
+justify-content: center;
+text-align: center;
+}
+
+
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 1000;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgba(0,0,0,0.6);
+
+  /* 🔽 Flexbox for vertical + horizontal centering */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.modal-content {
+  background-color: white;
+  margin: auto;
+  padding: 1.5rem;
+  border-radius: 0.5rem;
+  width: 80%;
+  max-width: 600px;
+    max-height: 90vh; /* 👈 Prevents it from overflowing screen height */
+  overflow-y: auto; /* 👈 Adds scroll if content gets too tall */
+  text-align: center;
+  position: relative;
+}
+
+.modal-content img {
+  width: 100%;
+  height: auto;
+  margin-bottom: 2rem;
+}
+
+.close-button {
+  position: absolute;
+  right: 15px;
+  top: 10px;
+  font-size: 1.5rem;
+  background-color:white;
+  border-radius: 20px;
+  width: 2rem;
+  height: 2rem;
+  cursor: pointer;
 }
