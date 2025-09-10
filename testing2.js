@@ -1,51 +1,64 @@
 const menuItems = [
-  { category: "Most Popular", name: "Sandwich", description: "", image: "images/bagel5.jpg" },
-  { category: "Most Popular", name: "Sandwich", description: "", image: "images/bagel5.jpg" },
-  { category: "Most Popular", name: "Sandwich", description: "", image: "images/bagel5.jpg" },
-  { category: "Most Popular", name: "Sandwich", description: "", image: "images/bagel5.jpg" },
-  { category: "Most Popular", name: "Sandwich", description: "", image: "images/bagel5.jpg" },
-  { category: "Most Popular", name: "Sandwich", description: "", image: "images/bagel5.jpg" },
-  { category: "Most Popular", name: "Sandwich", description: "", image: "images/bagel5.jpg" },
-  { category: "Most Popular", name: "Sandwich", description: "", image: "images/bagel5.jpg" },
-  { category: "Most Popular", name: "Sandwich", description: "", image: "images/bagel5.jpg" },
+  { category: "Most Popular", name: "Turkey & Ham Avacado Sandwich", description: "", image: "images/bagel2.jpg", addons: {
+  Rolls: ["Parmesian", "Cheddar", "Whole wheat" , "plain", "Parmesian Jalpeno" ],
+  Veggies: ["Lettuce", "Tomato", "Avocado"],
+  Drinks: ["Coke", "Water", "Smoothie"],
+  new: ["Cheese", "Bacon", "Egg"]} 
+},
+  { category: "Most Popular", name: "Sandwich", description: "", image: "images/bagel2.jpg" },
+  { category: "Most Popular", name: "Sandwich", description: "", image: "images/bagel2.jpg" },
+  { category: "Most Popular", name: "Sandwich", description: "", image: "images/bagel2.jpg" },
+  { category: "Most Popular", name: "Sandwich", description: "", image: "images/bagel2.jpg" },
+  { category: "Most Popular", name: "Sandwich", description: "", image: "images/bagel2.jpg" },
+  { category: "Most Popular", name: "Sandwich", description: "", image: "images/bagel2.jpg" },
+    { category: "Bagel", name: "Bagel", description: "", image: "images/bagel3.jpg" },
+    { category: "Bagel", name: "Bagel", description: "", image: "images/bagel3.jpg" },
+    { category: "Bagel", name: "Bagel", description: "", image: "images/bagel3.jpg" },
+    { category: "Bagel", name: "Bagel", description: "", image: "images/bagel3.jpg" },
+    { category: "Bagel", name: "Bagel", description: "", image: "images/bagel3.jpg" },
+    { category: "Bagel", name: "Bagel", description: "", image: "images/bagel3.jpg" },
+      { category: "Smoothie", name: "Smoothie", description: "", image: "images/bagel4.jpg" },
+      { category: "Smoothie", name: "Smoothie", description: "", image: "images/bagel4.jpg" },
+      { category: "Smoothie", name: "Smoothie", description: "", image: "images/bagel4.jpg" },
+      { category: "Smoothie", name: "Smoothie", description: "", image: "images/bagel4.jpg" },
+      { category: "Smoothie", name: "Smoothie", description: "", image: "images/bagel4.jpg" },
+      { category: "Smoothie", name: "Smoothie", description: "", image: "images/bagel4.jpg" },
 ];
 
 // DOM elements
-const menuContainer = document.getElementById("menu");
 const modal = document.getElementById("modal");
 const modalImage = document.getElementById("modal-image");
 const modalTitle = document.getElementById("modal-title");
 const modalDescription = document.getElementById("modal-description");
 const closeButton = document.querySelector(".close-button");
+const modalAddons = document.getElementById("modal-addons");
 
-
-modal.style.display= none; 
+// Hide modal initially
+modal.style.display = "none";
 
 // Group items by category
-const groupedItems = menuItems.reduce((acc, item) => {
-  if (!acc[item.category]) acc[item.category] = [];
-  acc[item.category].push(item);
-  return acc;
-}, {});
+const groupedItems = {};
+menuItems.forEach(item => {
+  if (!groupedItems[item.category]) {
+    groupedItems[item.category] = [];
+  }
+  groupedItems[item.category].push(item);
+});
 
-// Clear any existing menu content
-menuContainer.innerHTML = "";
+// Render grouped items
+const main = document.querySelector("main");
 
-// Create sections per category
 Object.entries(groupedItems).forEach(([category, items]) => {
-  // Group wrapper
   const group = document.createElement("div");
   group.classList.add("menu-group");
 
-  // Category heading
-  const heading = document.createElement("h2");
-  heading.classList.add("menu-group-title");
-  heading.textContent = category;
-  group.appendChild(heading);
+  const title = document.createElement("h2");
+  title.classList.add("menu-group-title");
+  title.textContent = category;
+  group.appendChild(title);
 
-  // Container for this group's items
-  const groupContainer = document.createElement("div");
-  groupContainer.classList.add("menu-container");
+  const container = document.createElement("div");
+  container.classList.add("menu-container");
 
   items.forEach(item => {
     const div = document.createElement("div");
@@ -59,27 +72,73 @@ Object.entries(groupedItems).forEach(([category, items]) => {
       </div>
     `;
 
-    div.addEventListener("click", () => {
-      modalImage.src = item.image;
-      modalTitle.textContent = item.name;
-      modalDescription.textContent = item.description;
-      modal.style.display = "block";
-    });
+    // Click to open modal
+div.addEventListener("click", () => {
+  modalImage.src = item.image;
+  modalTitle.textContent = item.name;
+  modalDescription.textContent = item.description;
 
-    groupContainer.appendChild(div);
+  modalAddons.innerHTML = ""; // Clear previous content
+
+  if (item.addons && typeof item.addons === 'object') {
+    for (const [category, options] of Object.entries(item.addons)) {
+      const categoryHeader = document.createElement("h4");
+      categoryHeader.textContent = category;
+      categoryHeader.classList.add("addon-category-title");
+      modalAddons.appendChild(categoryHeader);
+
+      options.forEach(option => {
+        const label = document.createElement("label");
+        label.classList.add("addon-item");
+
+        const input = document.createElement("input");
+
+        // ✅ Only one required category: 'Drinks' (change as needed)
+        if (category === "Rolls") {
+          input.type = "radio";
+          input.name = `addon-${category}`; // group radios
+          input.required = true; // ✅ make it required
+        } else {
+          input.type = "checkbox";
+          input.name = `addon-${category}`; // optional groups
+        }
+
+        input.value = option;
+
+        const span = document.createElement("span");
+        span.textContent = option;
+
+        label.appendChild(input);
+        label.appendChild(span);
+        modalAddons.appendChild(label);
+      });
+    }
+  }
+
+  modal.style.display = "flex";
+});
+
+
+
+    container.appendChild(div);
   });
 
-  group.appendChild(groupContainer);
-  menuContainer.appendChild(group);
-});
+  group.appendChild(container);
+  main.appendChild(group);
 
-// Close modal functionality
-closeButton.addEventListener("click", () => {
-  modal.style.display = "none";
-});
-
-window.addEventListener("click", (e) => {
-  if (e.target === modal) {
+    //Click to close modal
+  closeButton.addEventListener("click", () => {
     modal.style.display = "none";
-  }
+  });
+
+  // Close modal when clicking outside the modal content
+  window.addEventListener("click", (e) => {
+    if (e.target === modal) {
+      modal.style.display = "none";
+    }
+  });
+
 });
+
+
+

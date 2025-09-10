@@ -117,17 +117,20 @@ main {
 /* Container that holds all the menu items */
 .menu-container {
   display: grid;
-grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr));
+grid-template-columns: repeat(auto-fill, minmax(15rem, 1fr));
   gap: .5rem;
   max-width: 75rem; /* prevents stretching too wide */
   width: 100%;
   margin: 0 auto;
   padding: 2rem;
+  justify-items: center;
 }
+
 
 
 /* Each menu item box */
 .menu-item {
+  height: 100%;
   width: 100%;           /* fill grid column */
   aspect-ratio: 1 / 1;   /* maintain square */
   background-color: #fff;
@@ -147,7 +150,7 @@ grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr));
 
 .menu-item img {
   width: 100%;
-  height: 20%;
+  height: 80%;
   object-fit: cover;
   max-width: 100%;
   display: block;
@@ -155,7 +158,7 @@ grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr));
 
 .item-info {
   padding: 10px;
-  height: 40%;
+  height: 25%;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -164,7 +167,8 @@ grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr));
 
 /* Modal styles */
 .modal {
-  display: none;
+  display: flex;
+  align-items: center;
   position: fixed;
   z-index: 1000;
   left: 0;
@@ -172,7 +176,8 @@ grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr));
   width: 100%;
   height: 100%;
   overflow: auto;
-  background-color: rgba(0,0,0,0.6);
+  background-color: rgba(92, 89, 79, 0.445);
+  font-size: 1rem;
 
   /* Flexbox for vertical + horizontal centering */
   display: flex;
@@ -218,9 +223,74 @@ grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr));
 }
 
 .menu-group-title {
-  font-size: 1.75rem;
-  margin-bottom: 1rem;
+  font-size: 2.2rem;
+  margin-bottom: 1.5rem;
   text-align: left;
   padding-left: 2rem;
-  color: #333;
+  color: #000000;
+  font-weight: bold;
+}
+
+#modal-addons {
+  margin-top: 1rem;
+  display: flex;
+  flex-direction: column;
+  text-align: left;
+}
+.addon-category-title {
+  display: block;
+  width: 100%;             /* take full container width */
+  margin-top: .5 rem;
+  margin-bottom: 1rem;
+  font-size: 1.1rem;
+  font-weight: bold;
+  color: #000000;
+  border-bottom: 2px solid #000000;
+  padding-bottom: 0.25rem;
+  box-sizing: border-box;  /* includes padding & border in width */
+}
+.addon-item {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin: 0.25rem 0;
+  font-size: 1rem;
+  cursor: pointer;
+  user-select: none;
+  
+}
+
+.addon-item input[type="checkbox"],
+.addon-item input[type="radio"] {
+  appearance: none;
+  -webkit-appearance: none;
+  width: 1rem;
+  height: 1rem;
+  border: 1.5px solid #ccc;
+  border-radius: 4px;
+
+  position: relative;
+  cursor: pointer;
+  vertical-align: middle;
+  outline-offset: 2px;
+  transition: background-color 0.2s, border-color 0.2s;
+}
+
+.addon-item input[type="checkbox"]:checked,
+.addon-item input[type="radio"]:checked {
+  background-color: #4CAF50;
+  border-color: #4CAF50;
+}
+
+.addon-item input[type="checkbox"]:checked::after,
+.addon-item input[type="radio"]:checked::after {
+  content: "";
+  position: absolute;
+  top: 2px;
+  left: 5px;
+  width: 4px;
+  height: 8px;
+  border: solid white;
+  border-width: 0 2px 2px 0;
+  transform: rotate(45deg);
 }
