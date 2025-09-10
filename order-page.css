@@ -1,0 +1,83 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: Arial, sans-serif;
+}
+
+header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  background-color: black;
+  transition: top 0.3s;
+  z-index: 1000;
+}
+
+.nav-menu {
+  display: flex;
+  justify-content: center;
+  list-style: none;
+  padding: 1.5rem;
+}
+
+.nav-menu li {
+  color: white;
+  padding: 0 15px;
+  text-decoration: none;
+}
+.nav-menu li a {
+  color: white;
+  padding: 0 15px;
+  text-decoration: none;
+  transition: opacity 0.3s ease-in-out;  /* Smooth fade */
+
+}
+
+.nav-menu li a:hover {
+  opacity:0.5;
+}
+
+main {
+  padding-top: 80px; /* pushes content below fixed nav */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* Logo image wrapper */
+.logo-wrapper {
+  display: flex;
+  justify-content: left;
+  align-items: center;
+}
+
+/* Style the logo image */
+.bagel-drawing {
+  width: 100px;
+  height: 100px;
+  object-fit: contain;
+  padding: 20px;
+  margin-right: 1000px;
+}
+
+.image-gallery {
+  display: flex;
+  justify-content: center;   /* center horizontally */
+  align-items: center;       /* center vertically */
+  height: 25vh;             /* full viewport height */
+  width: 100vw;              /* full viewport width */
+  margin: 0;
+  padding: 0;
+  overflow: hidden;          /* optional: hides overflow if image is larger */
+}
+
+.image-gallery img {
+  width: 100vw;              /* stretch full width */
+  height: 60vh;              /* maintain aspect ratio */
+  object-fit: cover;         /* optional: crops nicely if needed */
+}
