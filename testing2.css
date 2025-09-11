@@ -205,11 +205,34 @@ grid-template-columns: repeat(auto-fill, minmax(15rem, 1fr));
   margin-bottom: 2rem;
 }
 
+.modal-content::-webkit-scrollbar {
+  width: 8px; /* Makes the scrollbar thinner */
+}
+
+.modal-content::-webkit-scrollbar-track {
+  background: #f1f1f1; /* Track background */
+  border-radius: 10px;
+  border-top: 2rem solid transparent;  /* space at top */
+  border-bottom: 2rem solid transparent; /* space at bottom */
+
+}
+
+.modal-content::-webkit-scrollbar-thumb {
+  background: #aaa6a6; /* Scrollbar color */
+  border-radius: 10px;
+  min-height: 40px; /* makes thumb not too small */
+}
+
+.modal-content::-webkit-scrollbar-thumb:hover {
+  background: #a0a0a0; /* On hover */
+}
+
+
 .close-button {
   position: absolute;
-  right: 15px;
+  left: 15px;
   top: 10px;
-  font-size: 1.5rem;
+  font-size: 3rem;
   background-color: white;
   border-radius: 20px;
   width: 2rem;
@@ -293,4 +316,23 @@ grid-template-columns: repeat(auto-fill, minmax(15rem, 1fr));
   border: solid white;
   border-width: 0 2px 2px 0;
   transform: rotate(45deg);
+}
+
+.add-to-cart-btn{
+font-weight:bold;
+width: 35rem;
+height: 2.5rem;
+border-radius:2rem;
+background-color: red;
+color: white;
+font-family:Arial;
+font-size: 1.5rem;
+margin-top:1rem;
+}
+
+.add-to-cart-btn:hover{
+  transform: scale(1.01);
+  cursor: pointer;
+  background-color: rgb(212, 21, 21);
+
 }

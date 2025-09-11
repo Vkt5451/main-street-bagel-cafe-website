@@ -11,14 +11,17 @@
     <body>
 
     <header id="header">
-        <nav>
+    <nav>
         <ul class="nav-menu">
-            <li><a href="#">Location</a></li>
-            <li><a href="order-page.html">Order Online</a></li>
-            <li><a href="#">Contact Us</a></li>
-            <li><a href="#">Join Our Team</a></li>
+        <li><a href="#">Location</a></li>
+        <li><a href="order-page.html">Order Online</a></li>
+        <li><a href="#">Contact Us</a></li>
+        <li><a href="#">Join Our Team</a></li>
+        <li><a href="#" id="cart-button">🛒 Cart (<span id="cart-count">0</span>)</a></li>
         </ul>
-        </nav>
+    </nav>
+
+
     </header>
 
     <main>
@@ -29,6 +32,7 @@
         <div class="image-gallery">
             <img src="images/bagel1.jpg" alt="Bagel 3">
         </div>
+        
 
 
         <!-- Existing menu container -->
@@ -44,10 +48,8 @@
                 
                 <p id="modal-description"></p>
 
-                <div id="modal-addons" class="modal-addons">
-
-
-                </div>
+                <div id="modal-addons" class="modal-addons"></div>
+                <button id="add-to-cart-btn" class = 'add-to-cart-btn'>Add to Cart</button> <!-- ✅ Add this -->
             </div>
         </div>
 

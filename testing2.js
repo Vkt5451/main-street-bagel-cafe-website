@@ -32,6 +32,8 @@ const modalTitle = document.getElementById("modal-title");
 const modalDescription = document.getElementById("modal-description");
 const closeButton = document.querySelector(".close-button");
 const modalAddons = document.getElementById("modal-addons");
+let currentSelectedItem = null; // For tracking current item
+const cart = []; // Your shopping cart array
 
 // Hide modal initially
 modal.style.display = "none";
@@ -74,6 +76,7 @@ Object.entries(groupedItems).forEach(([category, items]) => {
 
     // Click to open modal
 div.addEventListener("click", () => {
+  currentSelectedItem = item;
   modalImage.src = item.image;
   modalTitle.textContent = item.name;
   modalDescription.textContent = item.description;
@@ -137,8 +140,46 @@ div.addEventListener("click", () => {
       modal.style.display = "none";
     }
   });
-
 });
 
 
+  const addToCartBtn = document.getElementById("add-to-cart-btn");
 
+  addToCartBtn.addEventListener("click", () => {
+    if (!currentSelectedItem) return;
+
+    // Collect selected addons
+    const selectedAddons = {};
+    const inputs = modalAddons.querySelectorAll("input");
+
+    inputs.forEach(input => {
+      const category = input.name.replace("addon-", "");
+
+      if (input.checked) {
+        if (!selectedAddons[category]) {
+          selectedAddons[category] = [];
+        }
+        selectedAddons[category].push(input.value);
+      }
+    });
+
+    // Build cart item object
+    const cartItem = {
+      name: currentSelectedItem.name,
+      image: currentSelectedItem.image,
+      addons: selectedAddons
+    };
+
+    cart.push(cartItem); // Add to cart
+    updateCartCount();
+
+    
+    console.log("🛒 CART:", cart); // You can replace with actual UI rendering
+
+    modal.style.display = "none"; // Optionally close modal
+  });
+
+function updateCartCount() {
+  const cartCount = document.getElementById("cart-count");
+  cartCount.textContent = cart.length;
+}
