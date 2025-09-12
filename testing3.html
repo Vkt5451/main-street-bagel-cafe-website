@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Scroll Nav + Search Bar</title>
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+    }
+
+    /* === NAV BAR === */
+    header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 60px;
+      background-color: #ffffff;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+      z-index: 1000;
+      transition: top 0.3s ease;
+    }
+
+    header.hidden {
+      top: -60px; /* Hide nav bar on scroll down */
+    }
+
+    nav {
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .nav-menu {
+      list-style: none;
+      display: flex;
+      padding: 0;
+      margin: 0;
+    }
+
+    .nav-menu li {
+      margin: 0 15px;
+    }
+
+    .nav-menu a {
+      text-decoration: none;
+      color: #333;
+      font-weight: bold;
+    }
+
+    /* === SEARCH BAR === */
+    .search-bar-row {
+      background-color: #f2f2f2;
+      padding: 12px 20px;
+      border-bottom: 1px solid #ccc;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: sticky;
+      top: 0;
+      z-index: 500; /* Below the nav bar */
+      transition: top 0.3s ease;
+    }
+
+    .food-categories button {
+      margin-right: 10px;
+      padding: 6px 12px;
+    }
+
+    .search-input input {
+      padding: 6px 10px;
+    }
+
+    /* === MAIN CONTENT === */
+    main {
+      padding-top: 120px; /* Space for nav + search bar */
+    }
+
+    .content-block {
+      height: 1000px;
+      background: linear-gradient(to bottom, #fff, #ddd);
+      padding: 20px;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV BAR -->
+  <header id="header">
+    <nav>
+      <ul class="nav-menu">
+        <li><a href="#">Location</a></li>
+        <li><a href="#">Order Online</a></li>
+        <li><a href="#">Contact Us</a></li>
+        <li><a href="#">Join Our Team</a></li>
+        <li><a href="#" id="cart-button">🛒 Cart (<span id="cart-count">0</span>)</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <!-- SEARCH BAR -->
+  <div class="search-bar-row" id="search-bar">
+    <div class="food-categories">
+      <button>Food1</button>
+      <button>Food2</button>
+      <button>Food3</button>
+      <button>Food4</button>
+    </div>
+    <div class="search-input">
+      <input type="text" placeholder="Search..." />
+    </div>
+  </div>
+
+  <!-- MAIN CONTENT -->
+  <main>
+    <div class="content-block">
+      <h2>Scroll Down</h2>
+      <p>The nav bar will hide, and the search bar stays visible at the top.</p>
+      <p>Scroll back up and the nav bar reappears, pushing the search bar down.</p>
+    </div>
+    <div class="content-block">
+      <h2>More Content</h2>
+    </div>
+  </main>
+
+  <!-- SCRIPT -->
+  <script>
+    const header = document.getElementById("header");
+    let lastScroll = window.pageYOffset;
+
+    window.addEventListener("scroll", () => {
+      const currentScroll = window.pageYOffset;
+
+      if (currentScroll > lastScroll) {
+        // Scrolling down - hide nav bar
+        header.classList.add("hidden");
+      } else {
+        // Scrolling up - show nav bar
+        header.classList.remove("hidden");
+      }
+
+      lastScroll = currentScroll <= 0 ? 0 : currentScroll;
+    });
+  </script>
+
+</body>
+</html>

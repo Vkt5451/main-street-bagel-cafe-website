@@ -11,20 +11,43 @@
     <body>
 
     <header id="header">
-    <nav>
-        <ul class="nav-menu">
-        <li><a href="#">Location</a></li>
-        <li><a href="order-page.html">Order Online</a></li>
-        <li><a href="#">Contact Us</a></li>
-        <li><a href="#">Join Our Team</a></li>
-        <li><a href="#" id="cart-button">🛒 Cart (<span id="cart-count">0</span>)</a></li>
-        </ul>
-    </nav>
+        <nav>
+            <ul class="nav-menu">
+            <li><a href="#">Location</a></li>
+            <li><a href="order-page.html">Order Online</a></li>
+            <li><a href="#">Contact Us</a></li>
+            <li><a href="#">Join Our Team</a></li>
+            <li><a href="#" id="cart-button">🛒 Cart (<span id="cart-count">0</span>)</a></li>
+            </ul>
+        </nav>
 
+        <div class="search-bar-row">
+            <div class="search-bar-inner">
+            <button id="scroll-left" class="scroll-btn">&lt;</button>
+                <div class="food-categories">
+                    <button>Food1</button>
+                    <button>Food2</button>
+                    <button>Food3</button>
+                    <button>Food4</button>
+                    <button>Food5</button>
+                    <button>Food6</button>
+                    <button>Food6</button>
+                    <button>Food6</button>
+                    <button>Food6</button>
+                    <button>Food6</button>
+                    <button>Food6</button>
+                    <button>Food6</button>
+                </div>
+            <button id="scroll-right" class="scroll-btn">&gt;</button>
+                <div class="search-input">
+                    <input type="text" placeholder="Search...">
+                </div>
+            </div>
+        </div>
 
     </header>
 
-    <main>
+
         <div class="logo-wrapper">
             <img src="images/bagel_drawing.jpg" alt="bagel drawing" class="bagel-drawing">
         </div>
@@ -33,6 +56,9 @@
             <img src="images/bagel1.jpg" alt="Bagel 3">
         </div>
         
+    <main>
+
+
 
 
         <!-- Existing menu container -->
@@ -62,4 +88,43 @@
 
         <script src="testing2.js"></script>
     </body>
+
+
+    <script>
+    const header = document.getElementById('header');
+    const searchBar = document.querySelector('.search-bar-row');
+
+let lastScrollTop = 0;
+
+window.addEventListener('scroll', () => {
+  const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+
+  if (scrollTop > lastScrollTop) {
+    // Scrolling down
+    header.style.transform = 'translateY(-100%)';  // Hide nav up
+    searchBar.style.transform = 'translateY(0)';    // Show search bar
+  } else if (scrollTop < lastScrollTop - 5) {
+    // Scrolling up by 5px or more
+    header.style.transform = 'translateY(0)';      // Show nav
+   // searchBar.style.transform = 'translateY(-100%)'; // Hide search bar
+  }
+
+  lastScrollTop = scrollTop <= 0 ? 0 : scrollTop; // For Mobile or negative scroll
+});
+
+
+    const container = document.querySelector('.food-categories');
+    const btnLeft = document.getElementById('scroll-left');
+    const btnRight = document.getElementById('scroll-right');
+
+    btnLeft.addEventListener('click', () => {
+    container.scrollBy({ left: -150, behavior: 'smooth' });
+    });
+
+    btnRight.addEventListener('click', () => {
+    container.scrollBy({ left: 150, behavior: 'smooth' });
+    });
+
+
+</script>
 </html>

@@ -21,7 +21,6 @@
 }
 
 html, body {
-  overflow-x: hidden;
   max-width: 100vw;
   margin: 0;
   padding: 0;
@@ -30,25 +29,34 @@ html, body {
 
 body {
   font-family: Arial, sans-serif;
-  background-color: #fdfdfd;
+  background-color: #ffffff;
   padding: 20px;
 }
 
-header {
+#header, .search-bar-row {
   position: fixed;
-  top: 0;
   left: 0;
-  width: 100%;
-  background-color: black;
-  transition: top 0.3s;
+  right: 0;
+  background: white;
+  transition: transform 0.3s ease;
   z-index: 1000;
+  will-change: transform;
+}
+
+/* Position them at the top, stacked */
+#header {
+  top: 0;
+  height: 3.438rem; /* example height */
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+  transition: transform 0.3s ease;
+  transform: translateY(0);
 }
 
 .nav-menu {
   display: flex;
   justify-content: center;
   list-style: none;
-  padding: 1.5rem;
+  padding: .05rem;
 }
 
 .nav-menu li {
@@ -58,7 +66,7 @@ header {
 }
 
 .nav-menu li a {
-  color: white;
+  color: rgb(0, 0, 0);
   padding: 0 15px;
   text-decoration: none;
   transition: opacity 0.3s ease-in-out;
@@ -68,11 +76,69 @@ header {
   opacity: 0.5;
 }
 
+.search-bar-row {
+  position: sticky; 
+  top: 3.75rem; /* 60px = 3.75rem */
+  background: white; 
+  z-index: 999;
+  display: flex;
+  justify-content: center;
+  box-shadow: 0 0.125rem 0.3125rem rgba(0, 0, 0, 0.1); /* 2px 5px */
+  height: 4.375rem; /* 70px = 4.375rem */
+}
+
+.search-bar-inner {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  max-width: 50rem; /* 800px = 50rem */
+  border-top: 0.25rem solid black;   /* 4px = 0.25rem */
+  border-bottom: 0.25rem solid black;
+  padding: 0 1rem;
+}
+
+.food-categories {
+  display: flex;
+  overflow-x: auto;
+  gap: 0.5rem;
+  padding: 0.5rem 0;
+  /* Remove scrollbar-width:none; */
+}
+.food-categories button {
+  flex: 0 0 auto;
+  scroll-snap-align: start;
+  padding: 0.5rem 1rem;
+  white-space: nowrap;
+  border: none;
+  background-color: #eee;
+  border-radius: 0.25rem;
+  cursor: pointer;
+}
+
+#scroll-left, #scroll-right {
+  background: white;
+  border: 1px solid #ffffff;
+  padding: 0.5rem 1rem;
+  cursor: pointer;
+  user-select: none;
+  font-weight:bold;
+  font-size: 1rem;
+}
+
+#scroll-left {
+  margin-right: 0.5rem;
+}
+
+#scroll-right {
+  margin-left: 0.5rem;
+}
+
 main {
-  padding-top: 80px; /* pushes content below fixed nav */
+  padding-top: 10px; /* pushes content below fixed nav */
   display: flex;
   flex-direction: column;
-  align-items: center;
+  align-items: stretch;
 }
 
 /* Logo image wrapper */
