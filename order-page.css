@@ -13,25 +13,39 @@ header {
   top: 0;
   left: 0;
   width: 100%;
-  background-color: black;
+  background-color: rgb(255, 255, 255);
+  box-shadow: 0 0.313rem 0.413rem rgba(0,0,0,0.2);
   transition: top 0.3s;
   z-index: 1000;
 }
 
 .nav-menu {
   display: flex;
+  flex-wrap: wrap; /* ✅ allows wrapping on smaller screens */
   justify-content: center;
+  align-items: center;
   list-style: none;
-  padding: 1.5rem;
+  padding: 1rem;
+  gap: 1rem; /* ✅ gap between items */
+  font-size: clamp(0.8rem, 2vw, 1rem); /* ✅ responsive font size */
+  overflow-x: auto;
+  white-space: nowrap;
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
+
 }
 
-.nav-menu li {
-  color: white;
-  padding: 0 15px;
-  text-decoration: none;
-}
 .nav-menu li a {
-  color: white;
+  color: rgb(0, 0, 0);
+  text-decoration: none;
+  transition: opacity 0.3s ease-in-out;
+  display: flex;
+  align-items: center;
+  padding: 0.25rem 0.5rem;
+}
+
+.nav-menu li a {
+  color: rgb(0, 0, 0);
   padding: 0 15px;
   text-decoration: none;
   transition: opacity 0.3s ease-in-out;  /* Smooth fade */
@@ -52,38 +66,74 @@ main {
 /* Logo image wrapper */
 .logo-wrapper {
   display: flex;
-  justify-content: left;
   align-items: center;
+  padding-right: 1rem;
 }
+
 
 /* Style the logo image */
 .bagel-drawing {
-  width: 100px;
-  height: 100px;
+  width: clamp(2rem, 5vw, 3.5rem); /* ✅ resizes with screen */
+  height: auto;
   object-fit: contain;
-  padding: 20px;
-  margin-right: 1000px;
+  padding: 0.25rem;
+  margin: 0; /* ✅ remove huge margin that pushes menu */
 }
 
+
 .image-gallery {
+  position: relative; /* ✅ So the button can be placed inside */
   display: flex;
-  justify-content: center;   /* center horizontally */
-  align-items: center;       /* center vertically */
-  height: 25vh;             /* full viewport height */
-  width: 100vw;              /* full viewport width */
-  margin: 0;
+  justify-content: center;
+  align-items: center;
+  height: 95vh;
+  width: 100%;
+  overflow: hidden;
+  margin: 0 0 1.25rem 0;
   padding: 0;
-  overflow: hidden;          /* optional: hides overflow if image is larger */
-  margin-bottom: 20px;
+  
 }
 
 .image-gallery img {
-  width: 100vw;              /* stretch full width */
-  height: 60vh;              /* maintain aspect ratio */
-  object-fit: cover;         /* optional: crops nicely if needed */
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* ✅ Looks cleaner on all screens */
+  opacity: 0.8;
 }
 
+/* 🟢 NEW — styles the button */
+.order-button {
+  position: absolute;
+  top: 10rem;
+  left: 2rem;
+  background-color: #f82500;
+  color: white;
+  padding: 0.85rem 1.75rem;
+  border: none;
+  border-radius: 0.6rem;
+  font-size: 1.1rem;
+  text-decoration: none;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.2);
+  transition: background 0.3s ease;
+}
 
+.order-button:hover {
+  background-color: #be1b06;
+}
+
+.order-description{
+  position: absolute;
+  top: 2rem;
+  left: .8rem;
+  color: white;
+  padding: 0.75rem 1.5rem;
+  border: none;
+  border-radius: 0.5rem;
+  text-decoration: none;
+  font-size: 1.5rem;
+  font-weight:bold;
+  transition: background 0.3s ease;
+}
 
 
 /* Basic reset */
@@ -104,22 +154,28 @@ padding: 20px;
 .menu-container {
 display: flex;
 flex-wrap: wrap;
-gap: 20px;
+gap: 5rem;
 justify-content: center;
+margin-bottom: 1rem;
+
 }
 
 /* Each menu item box */
 .menu-item {
-width: 300px;
-height: 300px;
+width: 18.5rem;
+height: 18.5rem;
 background-color: #fff;
-border: 1px solid #ddd;
+border: 1px solid #7e7b7b;
 border-radius: 10px;
 overflow: hidden;
 display: flex;
 flex-direction: column;
 box-shadow: 0 2px 5px rgba(0,0,0,0.1);
 transition: transform 0.2s ease;
+display:flex;
+  text-decoration: none;     /* removes underline */
+  color: inherit;            /* uses parent color */
+
 }
 
 .menu-item:hover {
@@ -128,9 +184,15 @@ transform: scale(1.03);
 
 .menu-item img {
 width: 100%;
-height: 60%;
+height: 20rem;
 object-fit: cover;
+text-decoration: none;     /* 🔸 removes underline */
+color: inherit;            /* 🔸 keeps text same color as surrounding text */
+overflow: hidden;
+background-color:black;
 }
+
+
 
 .item-info {
 padding: 10px;
@@ -139,53 +201,41 @@ display: flex;
 flex-direction: column;
 justify-content: center;
 text-align: center;
+color:black;
+text-decoration: none;
 }
 
 
-.modal {
-  display: none;
-  position: fixed;
-  z-index: 1000;
-  left: 0;
-  top: 0;
-  width: 100%;
-  height: 100%;
-  overflow: auto;
-  background-color: rgba(0,0,0,0.6);
-
-  /* 🔽 Flexbox for vertical + horizontal centering */
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.modal-content {
-  background-color: white;
-  margin: auto;
-  padding: 1.5rem;
-  border-radius: 0.5rem;
-  width: 80%;
-  max-width: 600px;
-    max-height: 90vh; /* 👈 Prevents it from overflowing screen height */
-  overflow-y: auto; /* 👈 Adds scroll if content gets too tall */
-  text-align: center;
+.image-overlay {
   position: relative;
 }
 
-.modal-content img {
-  width: 100%;
-  height: auto;
-  margin-bottom: 2rem;
+.image-overlay img {
+  width: 1885px;
+  height: 20rem;
+  opacity: 0.8;
+
 }
 
-.close-button {
+.text-overlay {
   position: absolute;
-  right: 15px;
-  top: 10px;
-  font-size: 1.5rem;
-  background-color:white;
-  border-radius: 20px;
-  width: 2rem;
-  height: 2rem;
-  cursor: pointer;
+  top: 10%;
+  left: 0%;
+  right: 60%;
+  display: flex;
+  justify-content: space-between;
+  color: rgb(255, 255, 255);
+  padding: 1rem;
+  border-radius: 0.5rem;
+}
+
+.text-overlay h3 {
+  font-weight: bold;
+  font-size: 2rem;
+
+}
+
+.hours, .contact {
+  display: flex;
+  flex-direction: column;
 }

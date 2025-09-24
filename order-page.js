@@ -36,20 +36,7 @@ menuItems.forEach(item => {
     </div>
   `;
 
-  // Add click listener to open modal
-  div.addEventListener("click", () => {
-    modalImage.src = item.image;
-    modalTitle.textContent = item.name;
-    modalDescription.textContent = item.description;
-    modal.style.display = "block";
-  });
-
   menuContainer.appendChild(div);
-});
-
-// Close modal when X button is clicked
-closeButton.addEventListener("click", () => {
-  modal.style.display = "none";
 });
 
 // Close modal when clicking outside the modal content
