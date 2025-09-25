@@ -1,0 +1,298 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: Arial, sans-serif;
+}
+
+header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  background-color: black;
+  transition: top 0.3s;
+  z-index: 1000;
+}
+
+.nav-menu {
+  display: flex;
+  justify-content: center;
+  list-style: none;
+  padding: 1.5rem;
+}
+
+.nav-menu li {
+  color: white;
+  padding: 0 15px;
+  text-decoration: none;
+}
+.nav-menu li a {
+  color: white;
+  padding: 0 15px;
+  text-decoration: none;
+  transition: opacity 0.3s ease-in-out;  /* Smooth fade */
+
+}
+
+.nav-menu li a:hover {
+  opacity:0.5;
+}
+
+main {
+  padding-top: 80px; /* pushes content below fixed nav */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* Logo image wrapper */
+.logo-wrapper {
+  display: flex;
+  justify-content: left;
+  align-items: center;
+  margin-bottom: 20px; /* space between logo and gallery */
+}
+
+/* Style the logo image */
+.bagel-drawing {
+  width: 150px;
+  height: 150px;
+  object-fit: contain;
+  padding: 20px;
+  margin-right: 200px;
+}
+
+.image-gallery {
+  display: flex;
+  justify-content: center;   /* center horizontally */
+  align-items: center;       /* center vertically */
+  height: 65vh;             /* full viewport height */
+  width: 100vw;              /* full viewport width */
+  margin: 0;
+  padding: 0;
+  overflow: hidden;          /* optional: hides overflow if image is larger */
+}
+
+.image-gallery img {
+  width: 100vw;              /* stretch full width */
+  height: 100vh;              /* maintain aspect ratio */
+  object-fit: cover;         /* optional: crops nicely if needed */
+}
+
+
+.order-buttontop {
+  display: inline-block;
+  background-color: black;
+  color: white;
+  padding: 12px 24px;
+  border-radius: 30px;
+  text-decoration: none;
+  font-size: 20px;
+  transition: background-color 0.5s ease;
+  border: none;
+  cursor: pointer;
+}
+
+.order-buttontop:hover {
+  background-color: rgb(255, 0, 0);
+}
+
+.image-gallery {
+  position: relative; /* ✅ So the button can be placed inside */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 95vh;
+  width: 100%;
+  overflow: hidden;
+  margin: 0 0 1.25rem 0;
+  padding: 0;
+  
+}
+
+.image-gallery img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* ✅ Looks cleaner on all screens */
+  opacity: 0.8;
+}
+
+
+/* 🟢 NEW — styles the button */
+.order-button {
+  position: absolute;
+  top: 10rem;
+  left: 2rem;
+  background-color: #000000;
+  color: white;
+  padding: 0.85rem 1.75rem;
+  border: none;
+  border-radius: 0.6rem;
+  font-size: 1.1rem;
+  text-decoration: none;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.2);
+  transition: background 0.3s ease;
+}
+
+.order-button:hover {
+  background-color: #be1b06;
+}
+
+.order-description{
+  position: absolute;
+  top: 2rem;
+  left: .8rem;
+  color: white;
+  padding: 0.75rem 1.5rem;
+  border: none;
+  border-radius: 0.5rem;
+  text-decoration: none;
+  font-size: 1.5rem;
+  font-weight:bold;
+  transition: background 0.3s ease;
+}
+
+
+
+
+
+
+.image-overlay {
+  position: relative;
+  
+}
+
+.image-overlay img {
+  width: 100%;
+  height: 20rem;
+  opacity: 0.8;
+
+}
+
+.text-overlay {
+  position: absolute;
+  top: 10%;
+  left: 0%;
+  right: 60%;
+  display: flex;
+  justify-content: space-between;
+  color: rgb(255, 255, 255);
+  padding: 1rem;
+  border-radius: 0.5rem;
+}
+
+.text-overlay h3 {
+  font-weight: bold;
+  font-size: 2rem;
+
+}
+
+.hours, .contact {
+  display: flex;
+  flex-direction: column;
+}
+
+
+/* 🔁 Responsive adjustments for mobile */
+@media (max-width: 768px) {
+  header {
+    position: relative; /* Less intrusive on mobile */
+    padding: 1rem 0;
+  }
+
+  .nav-menu {
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+    padding: 1rem;
+  }
+
+  .bagel-drawing {
+    width: 5rem;
+    height: auto;
+    padding: 0;
+    margin: 0 auto;
+  }
+
+  .image-gallery {
+    flex-direction: column;
+    height: auto;
+  }
+
+  .order-button {
+    top: auto;
+    bottom: 2rem;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 1rem;
+    padding: 0.75rem 1.5rem;
+    width: 80%;
+    text-align: center;
+  }
+
+  .order-description {
+    top: 1rem;
+    left: 1rem;
+    right: 1rem;
+    font-size: 1.2rem;
+    text-align: center;
+    max-width: 90%;
+  }
+
+  .text-overlay {
+    flex-direction: column;
+    gap: 1rem;
+    left: 5%;
+    right: 5%;
+    top: 5%;
+  }
+
+  .text-overlay h3 {
+    font-size: 1.2rem;
+  }
+
+  .image-overlay img {
+    height: auto;
+  }
+}
+
+/* ✅ Accessibility: Focus styles for keyboard navigation */
+a:focus,
+button:focus {
+  outline: 2px solid #ff6600;
+  outline-offset: 4px;
+}
+
+/* ✅ Larger touch targets for mobile */
+.order-button,
+.order-buttontop,
+.nav-menu li a {
+  padding: 1rem 1.5rem;
+  font-size: 1rem;
+}
+
+/* ✅ Color contrast improvements (black/white is okay, but test red) */
+.order-button:hover,
+.order-buttontop:hover {
+  background-color: #cc0000; /* Higher contrast red */
+}
+
+/* ✅ Image and layout scaling */
+.image-gallery img,
+.image-overlay img {
+  max-width: 100%;
+  height: auto;
+  object-fit: cover;
+}
+
+/* Optional: improve body base size for readability */
+body {
+  font-size: 1rem; /* ~16px */
+  line-height: 1.6;
+  background-color: #fff;
+  color: #000;
+}
