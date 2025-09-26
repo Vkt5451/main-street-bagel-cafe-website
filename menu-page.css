@@ -527,10 +527,16 @@ main {
         font-size: 0.9rem;
     }
 
+    .modal {
+        display: flex;
+        justify-content: center;
+        align-items: flex-start; /* Aligns modal content toward the top */
+        padding-top: 10vh; /* Space from top; adjust as needed */
+    }
+
     .modal-content {
-        width: 95%;
-        padding: 1rem;
-        max-height: 85vh;
+        margin-top: 0; /* Remove any default margins */
+        transform: none; /* Remove centering transform */
     }
 
     .close-button {
